@@ -1,20 +1,16 @@
 pipeline{
       agent any
-      
-      stages{
 
-         stage('Compile Stage'){         
-             steps {             
-                  withMaven(maven: 'maven_3_6_2') {
-                        sh 'mvn clean install'
-                  }             
+      stages{
+         def mvnHome = tool name: 'maven', type: 'maven'
+         stage('Compile Stage'){
+             steps {
+                   sh "${mvnHome}/bin/mvn clean install"
              }         
          }
          stage('Test Stage'){         
-             steps {             
-                  withMaven(maven: 'maven_3_6_2') {
-                        sh 'mvn clean test'
-                  }             
+             steps {
+                    sh "${mvnHome}/bin/mvn clean install"
              }         
          }
          stage('Cucumber Reports'){         
