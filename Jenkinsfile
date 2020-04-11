@@ -1,13 +1,19 @@
-node{
-        
-         stage('Compile Stage'){
-                   def mvnHome = tool name: 'maven', type: 'maven',
-                   sh "${mvnHome}/bin/mvn clean install"
-                 
+pipeline{
+      agent any
+      
+      stages{
+         
+         stage('Compile Stage'){         
+             steps {  
+                        def mvnHome = tool name: 'maven', type: 'maven',
+                        sh "${mvnHome}/bin/mvn clean install"                           
+             }         
          }
          stage('Test Stage'){         
-                    def mvnHome = tool name: 'maven', type: 'maven',
-                    sh "${mvnHome}/bin/mvn clean install"                 
+             steps {      
+                        def mvnHome = tool name: 'maven', type: 'maven',
+                        sh "${mvnHome}/bin/mvn clean test"
+             }         
          }
          stage('Cucumber Reports'){         
              steps {
@@ -16,4 +22,7 @@ node{
                  jsonReportDirectory: 'target'
              }         
          }
+      
+      }
+
 }
