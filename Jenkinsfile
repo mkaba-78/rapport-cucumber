@@ -5,13 +5,13 @@ pipeline{
          
          stage('Compile Stage'){         
              steps {  
-                        def mvnHome = tool name: 'maven', type: 'maven',
+                        mvnHome = tool name: 'maven', type: 'maven',
                         sh "${mvnHome}/bin/mvn clean install"                           
              }         
          }
          stage('Test Stage'){         
              steps {      
-                        def mvnHome = tool name: 'maven', type: 'maven',
+                        mvnHome = tool name: 'maven', type: 'maven',
                         sh "${mvnHome}/bin/mvn clean test"
              }         
          }
